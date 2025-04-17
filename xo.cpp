@@ -83,19 +83,35 @@ int aclosol(char screen[],char mv){
 
 }
 
-void aimove(char screen[]){
+void aimove(char screen[],int numbofmvs,char answer){
 
         if(screen[4]=='.'){// get the middle
              screen[4]='O' ;
              return ;
         }
 
-        if(aclosol(screen,'O')==1) // putting the func in a con i will call it
+        if(numbofmvs==3 && answer == 'Y'){ // this part prevents forks 
+            if(screen[5]=='X' && screen[7]=='X'){
+                screen[8]='O' ;
+                return ;
+            }
+            else if((screen[0]=='X' && screen[8]=='X')||(screen[2]=='X' && screen[6]=='X') ){
+                screen[1]='O' ;
+                return ;
+            }
+            else if((screen[7]=='X' &&(screen[0]=='X' || screen[2]=='X'))||(screen[5]=='X' && screen[6]=='X')){
+                screen[8]='O' ;
+                return ;
+            }
+            
+        }
+
+        if(aclosol(screen,'O')==1) // putting the func in a condition i will call it
         return ;
         if(aclosol(screen,'X')==1)
         return ;
 
-   for(int i=0;i<5;i++){
+        for(int i=0;i<5;i++){
             if(screen[2*i]=='.' && i!=2){
                 screen[2*i]='O' ;
             return ;
@@ -107,8 +123,6 @@ void aimove(char screen[]){
                 return ;
                  }
             }
-
-
     }
 
 int main(){
@@ -118,11 +132,19 @@ int main(){
     for(int i=0;i<9;i++){
              screen[i] = '.';
     }
+   
+    char answer ;
+    
+    do{
+        cout << "do you want to activate the impossible mode (Y/n) :" ;   
+        cin >> answer ;
+    }while(answer!='Y' && answer!='n') ;
+     
     showscreen(screen) ;
    do{
 
     do{
-            cout << "\n enter the coords man (1-9)" ;
+            cout << "\n enter the coords (1-9) " ;
         cin >> chosenpos;
         chosenpos-- ;
         }while(!(screen[chosenpos]=='.' && chosenpos <9 && chosenpos>=0 )) ;
@@ -132,20 +154,23 @@ int main(){
 
     if(gamestate(screen,'X',numbofmvs)==0){
     cout << "now opponent move \n" ;
-    aimove(screen) ;
+    aimove(screen,numbofmvs,answer) ;
     showscreen(screen) ;
     numbofmvs ++ ;
     }
 
     }while(gamestate(screen,'X',numbofmvs)==0 && gamestate(screen,'O',numbofmvs)==0 ) ;
 
-    if(gamestate(screen,'X',numbofmvs)==3)
-    cout << "congratulation man you won " ;
+    if(gamestate(screen,'X',numbofmvs)==3){
+    cout << "congratulation man " ;
+        if(answer=='Y')
+         cout << "at least you know cpp" ;
+        }
      else if(gamestate(screen,'O',numbofmvs)==1)
-     cout << "try again " ;
+     cout << "try again man or hack the game it must be easier " ;
      else
-      cout << "a tie great performance maan any but still considered a loss" ;
-      
-      cout << " made by yanis hassaini in 2025 \n" ;
+      cout << "a tie great performance maan \n " ;
+      cout << "dedikass to our brotha nooh the afican man \n" ;
+      cout << "made by yanis hassaini in 2025 \n" ;
 
 }
