@@ -12,6 +12,9 @@ This repository contains a simple console-based Tic-Tac-Toe game, written in C++
 ## How to Play
 enter a numb between 1 and 9 untill the end
 
+modifaction : added the "impossible mode" , simply you can't win against him.
+
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/yaniis26hsn/tic-tac-toe.git
+
