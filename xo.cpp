@@ -90,7 +90,7 @@ void aimove(char screen[],int numbofmvs,char answer){
              return ;
         }
 
-        if(numbofmvs==3 && answer == 'Y'){ // this part prevents forks 
+        if(numbofmvs==3 && answer == 'Y'){ // this part prevents forks so the player won't be capable of winning 
             if(screen[5]=='X' && screen[7]=='X'){
                 screen[8]='O' ;
                 return ;
